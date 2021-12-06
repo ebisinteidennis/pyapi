@@ -23,11 +23,20 @@ urlpatterns = [
     # path('car', views.add_car),
     # path('<str:car_name>', views.get_car),
 
-    path('', views.apiOverview, name="api-overview"),
-	path('task-list/', views.taskList, name="task-list"),
-	path('task-detail/<str:pk>/', views.taskDetail, name="task-detail"),
-	path('task-create/', views.taskCreate, name="task-create"),
+    # path('', views.apiOverview, name="api-overview"),
+	# path('task-list/', views.taskList, name="task-list"),
+	# path('task-detail/<str:pk>/', views.taskDetail, name="task-detail"),
+	# path('task-create/', views.taskCreate, name="task-create"),
 
-	path('task-update/<str:pk>/', views.taskUpdate, name="task-update"),
-	path('task-delete/<str:pk>/', views.taskDelete, name="task-delete"),
+	# path('task-update/<str:pk>/', views.taskUpdate, name="task-update"),
+	# path('task-delete/<str:pk>/', views.taskDelete, name="task-delete"),
+
+    path('', views.apiOverview, name="api-overview"),
+	path('product-list/', views.productList, name="product-list"),
+	path('product-detail/<str:pk>/', views.productDetail, name="product-detail"),
+	path('product-create/', views.productCreate, name="product-create"),
+
+	path('product-update/<str:pk>/', views.productUpdate, name="product-update"),
+	path('product-delete/<str:pk>/', views.productDelete, name="product-delete"),
+
 ]

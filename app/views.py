@@ -5,37 +5,38 @@ from django.http import HttpResponse
 # import json
 # from app.models import Car
 
-from app.models import Task
+from app.models import Product
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from serializers import *
 
 # Create your views here.
 @api_view(['GET','POST'])
 def apiOverview(request):
     api_urls = {
-        'List': '/task-list/',
-        'Detail View': '/task-detail/<str:pk>/',
-        'Create': '/task-update/<str:pk>/',
-        'Delete': '/task-delete/<str:pk>/',
+        'List': '/product-list/',
+        'Detail View': '/product-detail/<str:pk>/',
+        'Create': '/product-update/<str:pk>/',
+        'Delete': '/product-delete/<str:pk>/',
     }
     return Response(api_urls)
 
 @api_view(['GET'])
-def taskList(request):
-	tasks = Task.objects.all().order_by('-id')
-	serializer = TaskSerializer(tasks, many=True)
+def productList(request):
+	product = Product.objects.all().order_by('-id')
+	serializer = ProductSerilizer(product, many=True)
 	return Response(serializer.data)
 
 @api_view(['GET'])
-def taskDetail(request, pk):
-	tasks = Task.objects.get(id=pk)
-	serializer = TaskSerializer(tasks, many=False)
+def productDetail(request, pk):
+	product = Product.objects.get(id=pk)
+	serializer = ProductSerilizer(product, many=False)
 	return Response(serializer.data)
 
 
 @api_view(['POST'])
-def taskCreate(request):
-	serializer = TaskSerializer(data=request.data)
+def productCreate(request):
+	serializer = ProductSerilizer(data=request.data)
 
 	if serializer.is_valid():
 		serializer.save()
@@ -43,9 +44,9 @@ def taskCreate(request):
 	return Response(serializer.data)
 
 @api_view(['POST'])
-def taskUpdate(request, pk):
-	task = Task.objects.get(id=pk)
-	serializer = TaskSerializer(instance=task, data=request.data)
+def productUpdate(request, pk):
+	product = Product.objects.get(id=pk)
+	serializer = ProductSerilizer(instance=product, data=request.data)
 
 	if serializer.is_valid():
 		serializer.save()
@@ -54,11 +55,61 @@ def taskUpdate(request, pk):
 
 
 @api_view(['DELETE'])
-def taskDelete(request, pk):
-	task = Task.objects.get(id=pk)
-	task.delete()
+def productDelete(request, pk):
+	product = Product.objects.get(id=pk)
+	product.delete()
 	return Response('Item succsesfully delete!')
 
+
+
+# @api_view(['GET','POST'])
+# def apiOverview(request):
+#     api_urls = {
+#         'List': '/task-list/',
+#         'Detail View': '/task-detail/<str:pk>/',
+#         'Create': '/task-update/<str:pk>/',
+#         'Delete': '/task-delete/<str:pk>/',
+#     }
+#     return Response(api_urls)
+
+# @api_view(['GET'])
+# def taskList(request):
+# 	tasks = Task.objects.all().order_by('-id')
+# 	serializer = TaskSerializer(tasks, many=True)
+# 	return Response(serializer.data)
+
+# @api_view(['GET'])
+# def taskDetail(request, pk):
+# 	tasks = Task.objects.get(id=pk)
+# 	serializer = TaskSerializer(tasks, many=False)
+# 	return Response(serializer.data)
+
+
+# @api_view(['POST'])
+# def taskCreate(request):
+# 	serializer = TaskSerializer(data=request.data)
+
+# 	if serializer.is_valid():
+# 		serializer.save()
+
+# 	return Response(serializer.data)
+
+# @api_view(['POST'])
+# def taskUpdate(request, pk):
+# 	task = Task.objects.get(id=pk)
+# 	serializer = TaskSerializer(instance=task, data=request.data)
+
+# 	if serializer.is_valid():
+# 		serializer.save()
+
+# 	return Response(serializer.data)
+
+
+# @api_view(['DELETE'])
+# def taskDelete(request, pk):
+# 	task = Task.objects.get(id=pk)
+# 	task.delete()
+# 	return Response('Item succsesfully delete!')
 
 
 # def index(request):
