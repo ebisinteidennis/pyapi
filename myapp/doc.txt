@@ -12,3 +12,5 @@ git remote add origin https://github.com/prrat/pyapi.git
 git push -u origin main
 
 
+after successful push to github make sure to do a git pull request before u start programming
+git pull
