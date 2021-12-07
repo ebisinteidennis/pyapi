@@ -51,3 +51,6 @@ whitenoise==4.0
 after installations of dependencies clone the entire repo to your local computer.
 run the project with python manage.py
 Copy the local host URL and paste in browser: http://127.0.0.1:8000/
+
+#Current Bug: Internal server error:
+# The location of the error: models.py and the sqlite3 database
