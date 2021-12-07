@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from app.models import Product
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from serializers import *
+from app.serializers import ProductSerializer
 
 # Create your views here.
 @api_view(['GET','POST'])
@@ -24,19 +24,19 @@ def apiOverview(request):
 @api_view(['GET'])
 def productList(request):
 	product = Product.objects.all().order_by('-id')
-	serializer = ProductSerilizer(product, many=True)
+	serializer = ProductSerializer(product, many=True)
 	return Response(serializer.data)
 
 @api_view(['GET'])
 def productDetail(request, pk):
 	product = Product.objects.get(id=pk)
-	serializer = ProductSerilizer(product, many=False)
+	serializer = ProductSerializer(product, many=False)
 	return Response(serializer.data)
 
 
 @api_view(['POST'])
 def productCreate(request):
-	serializer = ProductSerilizer(data=request.data)
+	serializer = ProductSerializer(data=request.data)
 
 	if serializer.is_valid():
 		serializer.save()
@@ -46,7 +46,7 @@ def productCreate(request):
 @api_view(['POST'])
 def productUpdate(request, pk):
 	product = Product.objects.get(id=pk)
-	serializer = ProductSerilizer(instance=product, data=request.data)
+	serializer = ProductSerializer(instance=product, data=request.data)
 
 	if serializer.is_valid():
 		serializer.save()
@@ -60,7 +60,8 @@ def productDelete(request, pk):
 	product.delete()
 	return Response('Item succsesfully delete!')
 
-
+# def server_error(request):
+# 	return render(request, "server_wrong.html")
 
 # @api_view(['GET','POST'])
 # def apiOverview(request):
