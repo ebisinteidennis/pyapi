@@ -14,7 +14,9 @@ class Task(models.Model):
 
 class Product(models.Model):
     product_list = models.CharField(max_length=200)
-    completed = models.BooleanField(default=False, blank=True, null=True)
+    product_detail = models.BooleanField(default=False, blank=True, null=True)
+    product_create = models.BooleanField(default= False, blank=True, null=True)
+    product_delete = models.BooleanField(default= True, blank=True, null= True)
       
     def __str__(self):
         return self.title
